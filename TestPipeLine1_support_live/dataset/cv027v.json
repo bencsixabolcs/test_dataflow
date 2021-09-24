@@ -1,0 +1,45 @@
+{
+    "name": "cv027v",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage_Input Files",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "CV.027V sample.csv",
+                "container": "inputfiles"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "SourceSystem",
+                "type": "String"
+            },
+            {
+                "name": "SourceObject",
+                "type": "String"
+            },
+            {
+                "name": "ObjectAttribute",
+                "type": "String"
+            },
+            {
+                "name": "SourceValue",
+                "type": "String"
+            },
+            {
+                "name": "TargetValue",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

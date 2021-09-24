@@ -1,0 +1,22 @@
+{
+    "now": "2021-09-23T15:01:50.258Z",
+    "perfNow": 4184847.200000286,
+    "diagnosticCorrelation": "fe296f1b-8adb-44da-a872-54aedfce97bb",
+    "source": "DownloadSupportFiles",
+    "environment": {
+        "productName": "adf",
+        "buildVersion": "1.0.20210918.8",
+        "environmentType": 3,
+        "resourceName": "DB010921ADFTutorialDataFactory",
+        "resourceRegion": "westeurope",
+        "resourceGroup": "dbazstoragegroup",
+        "subscriptionId": "34ac43e0-55ae-461e-b67b-54785855f9bc",
+        "sessionId": "GZ+i4",
+        "operationId": "6Y7Vv",
+        "gitType": "live"
+    },
+    "additionalInfo": {
+        "selectedResource": "TestPipeLine1",
+        "selectedResourceType": "pipeline"
+    }
+}

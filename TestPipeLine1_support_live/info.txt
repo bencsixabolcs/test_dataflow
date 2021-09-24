@@ -1,0 +1,6 @@
+selected resource name:		TestPipeLine1
+selected resource type:		pipeline
+factory name:			DB010921ADFTutorialDataFactory
+factory location:		westeurope
+subscription id:		34ac43e0-55ae-461e-b67b-54785855f9bc
+time of download (UTC):		Thu, 23 Sep 2021 15:01:50 GMT

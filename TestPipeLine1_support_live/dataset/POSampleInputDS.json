@@ -1,0 +1,405 @@
+{
+    "name": "POSampleInputDS",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "AzureBlobStorage_Input Files",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "PO Sample.csv",
+                "container": "inputfiles"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "firstRowAsHeader": true,
+            "quoteChar": "\""
+        },
+        "schema": [
+            {
+                "name": "SourceSystem",
+                "type": "String"
+            },
+            {
+                "name": "ObjectIdentifier",
+                "type": "String"
+            },
+            {
+                "name": "IcfaOrNonIcfa",
+                "type": "String"
+            },
+            {
+                "name": "PONumber",
+                "type": "String"
+            },
+            {
+                "name": "DisplayType",
+                "type": "String"
+            },
+            {
+                "name": "CompanyCode",
+                "type": "String"
+            },
+            {
+                "name": "VendorCode",
+                "type": "String"
+            },
+            {
+                "name": "Ref_Property_Id",
+                "type": "String"
+            },
+            {
+                "name": "Ref_Unit_Id",
+                "type": "String"
+            },
+            {
+                "name": "Ref_Vendor_Id",
+                "type": "String"
+            },
+            {
+                "name": "ExpenseType",
+                "type": "String"
+            },
+            {
+                "name": "PrintonPO",
+                "type": "String"
+            },
+            {
+                "name": "Description",
+                "type": "String"
+            },
+            {
+                "name": "ChangeOrder",
+                "type": "String"
+            },
+            {
+                "name": "ParentPO",
+                "type": "String"
+            },
+            {
+                "name": "OrderDate",
+                "type": "String"
+            },
+            {
+                "name": "RequiredByDate",
+                "type": "String"
+            },
+            {
+                "name": "ScheduledByDate",
+                "type": "String"
+            },
+            {
+                "name": "PaymentDueDate",
+                "type": "String"
+            },
+            {
+                "name": "ToDate",
+                "type": "String"
+            },
+            {
+                "name": "FromDate",
+                "type": "String"
+            },
+            {
+                "name": "Closed",
+                "type": "String"
+            },
+            {
+                "name": "ClosedDate",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined1",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined2",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined3",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined4",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined5",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined6",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined7",
+                "type": "String"
+            },
+            {
+                "name": "UserDefined8",
+                "type": "String"
+            },
+            {
+                "name": "InvoiceNo",
+                "type": "String"
+            },
+            {
+                "name": "BatchName",
+                "type": "String"
+            },
+            {
+                "name": "EmailWhenAppDeni",
+                "type": "String"
+            },
+            {
+                "name": "Notes",
+                "type": "String"
+            },
+            {
+                "name": "AddPayable",
+                "type": "String"
+            },
+            {
+                "name": "PrintNotes",
+                "type": "String"
+            },
+            {
+                "name": "BillToName",
+                "type": "String"
+            },
+            {
+                "name": "BillToAddress1",
+                "type": "String"
+            },
+            {
+                "name": "BillToAddress2",
+                "type": "String"
+            },
+            {
+                "name": "BillToAddress3",
+                "type": "String"
+            },
+            {
+                "name": "BillToCity",
+                "type": "String"
+            },
+            {
+                "name": "BillToCountry",
+                "type": "String"
+            },
+            {
+                "name": "BillToState",
+                "type": "String"
+            },
+            {
+                "name": "BillToZip",
+                "type": "String"
+            },
+            {
+                "name": "ShipToName",
+                "type": "String"
+            },
+            {
+                "name": "ShipToAddress1",
+                "type": "String"
+            },
+            {
+                "name": "ShipToAddress2",
+                "type": "String"
+            },
+            {
+                "name": "ShipToAddress3",
+                "type": "String"
+            },
+            {
+                "name": "ShipToCity",
+                "type": "String"
+            },
+            {
+                "name": "ShipToCountry",
+                "type": "String"
+            },
+            {
+                "name": "ShipToState",
+                "type": "String"
+            },
+            {
+                "name": "ShipToZip",
+                "type": "String"
+            },
+            {
+                "name": "QtyOrd",
+                "type": "String"
+            },
+            {
+                "name": "Measure",
+                "type": "String"
+            },
+            {
+                "name": "PropertyCode",
+                "type": "String"
+            },
+            {
+                "name": "InventoryLocationCode",
+                "type": "String"
+            },
+            {
+                "name": "ItemTypeCode",
+                "type": "String"
+            },
+            {
+                "name": "ItemDescription",
+                "type": "String"
+            },
+            {
+                "name": "StockCode",
+                "type": "String"
+            },
+            {
+                "name": "StockDescription",
+                "type": "String"
+            },
+            {
+                "name": "UnitPrice",
+                "type": "String"
+            },
+            {
+                "name": "Net",
+                "type": "String"
+            },
+            {
+                "name": "QtyReceived",
+                "type": "String"
+            },
+            {
+                "name": "DateReceived",
+                "type": "String"
+            },
+            {
+                "name": "PayAcctCode",
+                "type": "String"
+            },
+            {
+                "name": "TranType",
+                "type": "String"
+            },
+            {
+                "name": "VatRate",
+                "type": "String"
+            },
+            {
+                "name": "Invoice",
+                "type": "String"
+            },
+            {
+                "name": "InvDate",
+                "type": "String"
+            },
+            {
+                "name": "UnitCode",
+                "type": "String"
+            },
+            {
+                "name": "JobCode",
+                "type": "String"
+            },
+            {
+                "name": "CategoryCode",
+                "type": "String"
+            },
+            {
+                "name": "ContractCode",
+                "type": "String"
+            },
+            {
+                "name": "CostCode",
+                "type": "String"
+            },
+            {
+                "name": "Segment1",
+                "type": "String"
+            },
+            {
+                "name": "Segment2",
+                "type": "String"
+            },
+            {
+                "name": "Segment3",
+                "type": "String"
+            },
+            {
+                "name": "Segment4",
+                "type": "String"
+            },
+            {
+                "name": "Segment5",
+                "type": "String"
+            },
+            {
+                "name": "Segment6",
+                "type": "String"
+            },
+            {
+                "name": "Segment7",
+                "type": "String"
+            },
+            {
+                "name": "Segment8",
+                "type": "String"
+            },
+            {
+                "name": "Segment9",
+                "type": "String"
+            },
+            {
+                "name": "Segment10",
+                "type": "String"
+            },
+            {
+                "name": "Segment11",
+                "type": "String"
+            },
+            {
+                "name": "Segment12",
+                "type": "String"
+            },
+            {
+                "name": "Det1",
+                "type": "String"
+            },
+            {
+                "name": "Det2",
+                "type": "String"
+            },
+            {
+                "name": "Det3",
+                "type": "String"
+            },
+            {
+                "name": "Det4",
+                "type": "String"
+            },
+            {
+                "name": "Det5",
+                "type": "String"
+            },
+            {
+                "name": "Det6",
+                "type": "String"
+            },
+            {
+                "name": "Det7",
+                "type": "String"
+            },
+            {
+                "name": "Det8",
+                "type": "String"
+            }
+        ]
+    },
+    "type": "Microsoft.DataFactory/factories/datasets"
+}

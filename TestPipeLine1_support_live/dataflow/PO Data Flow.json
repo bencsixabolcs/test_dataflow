@@ -1,0 +1,58 @@
+{
+    "name": "PO Data Flow",
+    "properties": {
+        "type": "MappingDataFlow",
+        "typeProperties": {
+            "sources": [
+                {
+                    "dataset": {
+                        "referenceName": "POSampleInputDS",
+                        "type": "DatasetReference"
+                    },
+                    "name": "POETLOut"
+                },
+                {
+                    "dataset": {
+                        "referenceName": "cv027v",
+                        "type": "DatasetReference"
+                    },
+                    "name": "cv027v"
+                }
+            ],
+            "sinks": [
+                {
+                    "dataset": {
+                        "referenceName": "DelimitedTextYardiPOOut",
+                        "type": "DatasetReference"
+                    },
+                    "name": "sinkout"
+                },
+                {
+                    "dataset": {
+                        "referenceName": "POSampleSummaryProfileOut",
+                        "type": "DatasetReference"
+                    },
+                    "name": "SinkSummaryProfile"
+                }
+            ],
+            "transformations": [
+                {
+                    "name": "Transformjoinone"
+                },
+                {
+                    "name": "SelectVC"
+                },
+                {
+                    "name": "DerivedColumn1"
+                },
+                {
+                    "name": "DerivedColumn2"
+                },
+                {
+                    "name": "SummaryProfile"
+                }
+            ],
+            "script": "source(output(\n\t\tSourceSystem as string,\n\t\tObjectIdentifier as string,\n\t\tIcfaOrNonIcfa as string,\n\t\tPONumber as string,\n\t\tDisplayType as string,\n\t\tCompanyCode as string,\n\t\tVendorCode as string,\n\t\tRef_Property_Id as string,\n\t\tRef_Unit_Id as string,\n\t\tRef_Vendor_Id as string,\n\t\tExpenseType as string,\n\t\tPrintonPO as string,\n\t\tDescription as string,\n\t\tChangeOrder as string,\n\t\tParentPO as string,\n\t\tOrderDate as string,\n\t\tRequiredByDate as string,\n\t\tScheduledByDate as string,\n\t\tPaymentDueDate as string,\n\t\tToDate as string,\n\t\tFromDate as string,\n\t\tClosed as string,\n\t\tClosedDate as string,\n\t\tUserDefined1 as string,\n\t\tUserDefined2 as string,\n\t\tUserDefined3 as string,\n\t\tUserDefined4 as string,\n\t\tUserDefined5 as string,\n\t\tUserDefined6 as string,\n\t\tUserDefined7 as string,\n\t\tUserDefined8 as string,\n\t\tInvoiceNo as string,\n\t\tBatchName as string,\n\t\tEmailWhenAppDeni as string,\n\t\tNotes as string,\n\t\tAddPayable as string,\n\t\tPrintNotes as string,\n\t\tBillToName as string,\n\t\tBillToAddress1 as string,\n\t\tBillToAddress2 as string,\n\t\tBillToAddress3 as string,\n\t\tBillToCity as string,\n\t\tBillToCountry as string,\n\t\tBillToState as string,\n\t\tBillToZip as string,\n\t\tShipToName as string,\n\t\tShipToAddress1 as string,\n\t\tShipToAddress2 as string,\n\t\tShipToAddress3 as string,\n\t\tShipToCity as string,\n\t\tShipToCountry as string,\n\t\tShipToState as string,\n\t\tShipToZip as string,\n\t\tQtyOrd as string,\n\t\tMeasure as string,\n\t\tPropertyCode as string,\n\t\tInventoryLocationCode as string,\n\t\tItemTypeCode as string,\n\t\tItemDescription as string,\n\t\tStockCode as string,\n\t\tStockDescription as string,\n\t\tUnitPrice as string,\n\t\tNet as string,\n\t\tQtyReceived as string,\n\t\tDateReceived as string,\n\t\tPayAcctCode as string,\n\t\tTranType as string,\n\t\tVatRate as string,\n\t\tInvoice as string,\n\t\tInvDate as string,\n\t\tUnitCode as string,\n\t\tJobCode as string,\n\t\tCategoryCode as string,\n\t\tContractCode as string,\n\t\tCostCode as string,\n\t\tSegment1 as string,\n\t\tSegment2 as string,\n\t\tSegment3 as string,\n\t\tSegment4 as string,\n\t\tSegment5 as string,\n\t\tSegment6 as string,\n\t\tSegment7 as string,\n\t\tSegment8 as string,\n\t\tSegment9 as string,\n\t\tSegment10 as string,\n\t\tSegment11 as string,\n\t\tSegment12 as string,\n\t\tDet1 as string,\n\t\tDet2 as string,\n\t\tDet3 as string,\n\t\tDet4 as string,\n\t\tDet5 as string,\n\t\tDet6 as string,\n\t\tDet7 as string,\n\t\tDet8 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> POETLOut\nsource(output(\n\t\tSourceSystem as string,\n\t\tSourceObject as string,\n\t\tObjectAttribute as string,\n\t\tSourceValue as string,\n\t\tTargetValue as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tpartitionBy('hash', 1)) ~> cv027v\nPOETLOut, cv027v join(POETLOut@SourceSystem == cv027v@SourceSystem\n\t&& ObjectIdentifier == SourceObject\n\t&& VendorCode == SourceValue,\n\tjoinType:'left',\n\tbroadcast: 'both')~> Transformjoinone\nTransformjoinone select(mapColumn(\n\t\tSourceSystem = POETLOut@SourceSystem,\n\t\tObjectIdentifier,\n\t\tIcfaOrNonIcfa,\n\t\tPONumber,\n\t\tDisplayType,\n\t\tCompanyCode,\n\t\tVendorCode = TargetValue,\n\t\tRef_Property_Id,\n\t\tRef_Unit_Id,\n\t\tRef_Vendor_Id,\n\t\tExpenseType,\n\t\tPrintonPO,\n\t\tDescription,\n\t\tChangeOrder,\n\t\tParentPO,\n\t\tOrderDate,\n\t\tRequiredByDate,\n\t\tScheduledByDate,\n\t\tPaymentDueDate,\n\t\tToDate,\n\t\tFromDate,\n\t\tClosed,\n\t\tClosedDate,\n\t\tUserDefined1,\n\t\tUserDefined2,\n\t\tUserDefined3,\n\t\tUserDefined4,\n\t\tUserDefined5,\n\t\tUserDefined6,\n\t\tUserDefined7,\n\t\tUserDefined8,\n\t\tInvoiceNo,\n\t\tBatchName,\n\t\tEmailWhenAppDeni,\n\t\tNotes,\n\t\tAddPayable,\n\t\tPrintNotes,\n\t\tBillToName,\n\t\tBillToAddress1,\n\t\tBillToAddress2,\n\t\tBillToAddress3,\n\t\tBillToCity,\n\t\tBillToCountry,\n\t\tBillToState,\n\t\tBillToZip,\n\t\tShipToName,\n\t\tShipToAddress1,\n\t\tShipToAddress2,\n\t\tShipToAddress3,\n\t\tShipToCity,\n\t\tShipToCountry,\n\t\tShipToState,\n\t\tShipToZip,\n\t\tQtyOrd,\n\t\tMeasure,\n\t\tPropertyCode,\n\t\tInventoryLocationCode,\n\t\tItemTypeCode,\n\t\tItemDescription,\n\t\tStockCode,\n\t\tStockDescription,\n\t\tUnitPrice,\n\t\tNet,\n\t\tQtyReceived,\n\t\tDateReceived,\n\t\tPayAcctCode,\n\t\tTranType,\n\t\tVatRate,\n\t\tInvoice,\n\t\tInvDate,\n\t\tUnitCode,\n\t\tJobCode,\n\t\tCategoryCode,\n\t\tContractCode,\n\t\tCostCode,\n\t\tSegment1,\n\t\tSegment2,\n\t\tSegment3,\n\t\tSegment4,\n\t\tSegment5,\n\t\tSegment6,\n\t\tSegment7,\n\t\tSegment8,\n\t\tSegment9,\n\t\tSegment10,\n\t\tSegment11,\n\t\tSegment12,\n\t\tDet1,\n\t\tDet2,\n\t\tDet3,\n\t\tDet4,\n\t\tDet5,\n\t\tDet6,\n\t\tDet7,\n\t\tDet8,\n\t\tSourceObject,\n\t\tObjectAttribute,\n\t\tSourceValue\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectVC\nSelectVC derive(ErrorMsg = iif(isNull(VendorCode),'Bad VC mapping','P'),\n\tpartitionBy('hash', 1)) ~> DerivedColumn1\nDerivedColumn1 derive(ErrorMsg = iif(isNull(VendorCode),ErrorMsg+'Bad VC mapping',ErrorMsg+'P')) ~> DerivedColumn2\nPOETLOut aggregate(each(match(true()), $$+'_NotNull' = countIf(!isNull($$)), $$+'_Null' = countIf(isNull($$)), $$+'_TotalCount' = count($$)),\n\t\teach(match(type=='double'||type=='integer'||type=='short'||type=='decimal'), $$+'_StdDev' = round(stddev($$),2), $$+'_Max' = max($$), $$+'_Min' = min($$)),\n\t\teach(match(type=='string'), $$+'_MaxLength' = max(length($$)), $$+'_MinLength' = min(length($$)))) ~> SummaryProfile\nDerivedColumn2 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['POYardiout.csv'],\n\tmapColumn(\n\t\tIcfaOrNonIcfa,\n\t\tPONumber,\n\t\tDisplayType,\n\t\tCompanyCode,\n\t\tVendorCode,\n\t\tRef_Property_Id,\n\t\tRef_Unit_Id,\n\t\tRef_Vendor_Id,\n\t\tExpenseType,\n\t\tPrintonPO,\n\t\tDescription,\n\t\tChangeOrder,\n\t\tParentPO,\n\t\tOrderDate,\n\t\tRequiredByDate,\n\t\tScheduledByDate,\n\t\tPaymentDueDate,\n\t\tToDate,\n\t\tFromDate,\n\t\tClosed,\n\t\tClosedDate,\n\t\tUserDefined1,\n\t\tUserDefined2,\n\t\tUserDefined3,\n\t\tUserDefined4,\n\t\tUserDefined5,\n\t\tUserDefined6,\n\t\tUserDefined7,\n\t\tUserDefined8,\n\t\tInvoiceNo,\n\t\tBatchName,\n\t\tEmailWhenAppDeni,\n\t\tNotes,\n\t\tAddPayable,\n\t\tPrintNotes,\n\t\tBillToName,\n\t\tBillToAddress1,\n\t\tBillToAddress2,\n\t\tBillToAddress3,\n\t\tBillToCity,\n\t\tBillToCountry,\n\t\tBillToState,\n\t\tBillToZip,\n\t\tShipToName,\n\t\tShipToAddress1,\n\t\tShipToAddress2,\n\t\tShipToAddress3,\n\t\tShipToCity,\n\t\tShipToCountry,\n\t\tShipToState,\n\t\tShipToZip,\n\t\tQtyOrd,\n\t\tMeasure,\n\t\tPropertyCode,\n\t\tInventoryLocationCode,\n\t\tItemTypeCode,\n\t\tItemDescription,\n\t\tStockCode,\n\t\tStockDescription,\n\t\tUnitPrice,\n\t\tNet,\n\t\tQtyReceived,\n\t\tDateReceived,\n\t\tPayAcctCode,\n\t\tTranType,\n\t\tVatRate,\n\t\tInvoice,\n\t\tInvDate,\n\t\tUnitCode,\n\t\tJobCode,\n\t\tCategoryCode,\n\t\tContractCode,\n\t\tCostCode,\n\t\tSegment1,\n\t\tSegment2,\n\t\tSegment3,\n\t\tSegment4,\n\t\tSegment5,\n\t\tSegment6,\n\t\tSegment7,\n\t\tSegment8,\n\t\tSegment9,\n\t\tSegment10,\n\t\tSegment11,\n\t\tSegment12,\n\t\tDet1,\n\t\tDet2,\n\t\tDet3,\n\t\tDet4,\n\t\tDet5,\n\t\tDet6,\n\t\tDet7,\n\t\tDet8\n\t),\n\tpartitionBy('hash', 1)) ~> sinkout\nSummaryProfile sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['POSampleSummaryProfileOut'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tsaveOrder: 1,\n\tpartitionBy('hash', 1)) ~> SinkSummaryProfile"
+        }
+    }
+}
